@@ -108,7 +108,7 @@ class DatoRoutes {
             database_1.db.desconectarBD();
         });
         this.deleteAutos = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const matricula = req.params;
+            const matricula = req.params.matricula;
             yield database_1.db.conectarBD();
             yield autos_1.Autos.findOneAndDelete({
                 _matricula: matricula

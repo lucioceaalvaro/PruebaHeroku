@@ -127,7 +127,7 @@ class DatoRoutes {
         db.desconectarBD()
     }
     private deleteAutos = async (req: Request, res: Response) => {
-        const matricula =req.params
+        const matricula =req.params.matricula
         await db.conectarBD()
 
         await Autos.findOneAndDelete(
