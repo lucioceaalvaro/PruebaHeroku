@@ -126,7 +126,19 @@ class DatoRoutes {
 
         db.desconectarBD()
     }
+    private deleteAutos = async (req: Request, res: Response) => {
+        const matricula =req.params
+        await db.conectarBD()
 
+        await Autos.findOneAndDelete(
+            {
+                _matricula: matricula
+            }
+        )
+        .then((doc:any)=>res.send("Ha ido bien"+doc))
+        .catch((err:any)=> res.send("Error: "+err))
+        await db.desconectarBD()
+    }
     /*private updatePm = async (req: Request, res: Response) => {
         await db.conectarBD()
             .then(async (mensaje) => {
@@ -153,6 +165,7 @@ db.desconectarBD()
         this._router.post('/auto', this.crearAuto)
         this._router.put('/modificar', this.modificarAuto)
         this._router.put('/mod/:matriculaP/:cambioP', this.modificarAuto2)
+        this._router.delete('/auto/:matricula', this.deleteAutos)
         //this._router.put('/autos/:matriculax/:cambio', this.updatePm)
     }
 

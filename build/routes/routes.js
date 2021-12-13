@@ -107,6 +107,16 @@ class DatoRoutes {
             });
             database_1.db.desconectarBD();
         });
+        this.deleteAutos = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const matricula = req.params;
+            yield database_1.db.conectarBD();
+            yield autos_1.Autos.findOneAndDelete({
+                _matricula: matricula
+            })
+                .then((doc) => res.send("Ha ido bien" + doc))
+                .catch((err) => res.send("Error: " + err));
+            yield database_1.db.desconectarBD();
+        });
         this._router = (0, express_1.Router)();
     }
     get router() {
@@ -135,6 +145,7 @@ db.desconectarBD()
         this._router.post('/auto', this.crearAuto);
         this._router.put('/modificar', this.modificarAuto);
         this._router.put('/mod/:matriculaP/:cambioP', this.modificarAuto2);
+        this._router.delete('/auto/:matricula', this.deleteAutos);
         //this._router.put('/autos/:matriculax/:cambio', this.updatePm)
     }
 }
